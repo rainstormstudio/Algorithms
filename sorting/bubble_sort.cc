@@ -12,7 +12,7 @@
 #include <vector>
 
 /**
- * @brief bubble sorts the array a
+ * @brief bubble_sort sorts the array a
  * O(n^2)
  * 
  * @param a the array we want to perform bubble sort with

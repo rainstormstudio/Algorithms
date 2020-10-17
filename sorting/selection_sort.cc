@@ -12,7 +12,7 @@
 #include <vector>
 
 /**
- * @brief selection sorts the array a
+ * @brief selection_sort sorts the array a
  * O(n^2)
  * 
  * @param a the array we want to perform selection sort with
