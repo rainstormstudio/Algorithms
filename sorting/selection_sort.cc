@@ -20,13 +20,13 @@
 void selection_sort(std::vector<int> &a) {
     int len = a.size();
     for (int i = 0; i < len - 1; i ++) {
+        int min = i;
         for (int j = i + 1; j < len; j ++) {
-            if (a[i] > a[j]) {
-                int temp = a[i];
-                a[i] = a[j];
-                a[j] = temp;
+            if (a[j] < a[min]) {
+                min = j;
             }
         }
+        std::swap(a[i], a[min]);
     }
 }
 
