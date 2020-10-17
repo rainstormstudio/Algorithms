@@ -44,6 +44,7 @@ void calcLPS(int* lps, int m, std::string pattern) {
 /**
  * @brief KMP runs Knuth-Morris-Pratt algorithm and it
  * outputs the positions of pattern in str
+ * O(m + n)
  * 
  * @param str the main text string
  * @param pattern the substring we want to find in str
