@@ -23,15 +23,14 @@ public class SelectionSort {
         for(int i=0;  i<len ; i++){//loop through the array 0~length-1
             int minIndex=i;
 
-            for (int j=i; j<len;j++){//loop through the unsorted part i~length-1
-                if(array[j]<array[i]){
-                    array[i]=array[j];
+            for (int j=i+1; j<len;j++){//loop through the unsorted part i~length-1
+                if(array[j]<array[minIndex]){
                     minIndex=j;
                 }
             }
 
             int temp=array[i];
-            array[i]=array[i];
+            array[i]=array[minIndex];
             array[minIndex]=temp;
 
         }
@@ -49,8 +48,7 @@ public class SelectionSort {
         System.out.println("set the array");
 
         for(int i=0; i<x; i++){
-            Scanner s2= new Scanner(System.in);
-            array[i]=s2.nextInt();
+            array[i]=s1.nextInt();
         }
 
         selectionSort(array,x);
@@ -58,7 +56,10 @@ public class SelectionSort {
         System.out.println("print the sorted array");
         for(int i=0; i<x; i++){
             System.out.print(array[i]);
+            System.out.print(' ');
         }
+        System.out.println();
+        s1.close();
     }
 
 }

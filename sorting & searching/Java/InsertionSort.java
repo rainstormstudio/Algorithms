@@ -45,8 +45,7 @@ public class InsertionSort {
         System.out.println("set the array");
 
         for(int i=0; i<x; i++){
-            Scanner s2= new Scanner(System.in);
-            array[i]=s2.nextInt();
+            array[i]=s1.nextInt();
         }
 
         insertionSort(array,x);
@@ -54,6 +53,9 @@ public class InsertionSort {
         System.out.println("print the sorted array");
         for(int i=0; i<x; i++){
             System.out.print(array[i]);
+            System.out.print(' ');
         }
+        System.out.println();
+        s1.close();
     }
 }

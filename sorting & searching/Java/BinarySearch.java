@@ -65,14 +65,14 @@ public class BinarySearch {
 
         System.out.println("initialize the array");
         for(int i=0; i<x; i++){
-            Scanner s2= new Scanner(System.in);
-            array[i]=s2.nextInt();
+            array[i]=s1.nextInt();
         }
         bubbleSort(array,x);
         System.out.println("enter the target value");
-        Scanner s3= new Scanner(System.in);
-        int k=s3.nextInt();
+        int k=s1.nextInt();
+        
         //output
         System.out.println( binarySearch(array,k));
+        s1.close();
     }
 }
