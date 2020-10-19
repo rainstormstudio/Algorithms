@@ -34,15 +34,15 @@ public class BubbleSort{
 
     public static void main(String args[]){
         System.out.println("enter the length of an array");
-        Scanner s1= new Scanner(System.in);
+        Scanner input= new Scanner(System.in);
         int x;
-        x=s1.nextInt();
+        x=input.nextInt();
 
         int[] array= new int[x];
         System.out.println("set the array");
 
         for(int i=0; i<x; i++){
-            array[i]=s1.nextInt();
+            array[i]=input.nextInt();
         }
 
         bubbleSort(array,x);
@@ -53,7 +53,7 @@ public class BubbleSort{
             System.out.print(' ');
         }
         System.out.println();
-        s1.close();
+        input.close();
     }
 
 }

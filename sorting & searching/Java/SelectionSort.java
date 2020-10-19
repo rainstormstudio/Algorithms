@@ -37,7 +37,6 @@ public class SelectionSort {
 
     }
 
-
     public static void main(String args[]){
         System.out.println("enter the length of an array");
         Scanner s1= new Scanner(System.in);
