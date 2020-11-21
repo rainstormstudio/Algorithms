@@ -7,7 +7,6 @@
  * @Copyright Copyright (c) 2020
  */
 
-
 public class Heap {
 
     public static int[] array;
