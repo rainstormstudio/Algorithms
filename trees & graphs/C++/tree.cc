@@ -43,7 +43,12 @@ public:
 class Tree {
     std::shared_ptr<Node> root;
 public:
+    Tree() : root{nullptr} {}
     Tree(std::istream &in) {
+        input(in);
+    }
+
+    void input(std::istream &in) {
         root = std::make_shared<Node>(in);
     }
 
