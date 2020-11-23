@@ -3,16 +3,16 @@
  * @Author Weilan Tao
  * @Date 2020-11-19
  * @Description This is the implementation for Max Heap, Java version.
- * @Since version-1.1
+ * @Since version-1.2
  * @Copyright Copyright (c) 2020
  */
 
 
 public class Heap {
 
-    public static int[] array;
-    private static int len;
-    private static int heapLen;
+    private  int[] array;
+    private  int len;
+    private  int heapLen;
 
     public Heap() {
         this.len = 1;
@@ -21,30 +21,30 @@ public class Heap {
         heapLen = len;
     }
 
-    public static int getHeapLen() {
+    public  int getHeapLen() {
         return heapLen - 1;
     }
 
-    public static void getHeap() {
+    public  void printHeap() {
         for (int i = 1; i < heapLen; i++) {
             System.out.print(array[i] + " ");
         }
         System.out.println(" ");
     }
 
-    public static int parentIndex(int index) {
+    private  int parentIndex(int index) {
         return index / 2;
     }
 
-    public static int leftChild(int index) {
+    private  int leftChild(int index) {
         return index * 2;
     }
 
-    public static int rightChild(int index) {
+    private  int rightChild(int index) {
         return index * 2 + 1;
     }
 
-    public static void swap(int indexA, int indexB, int[] array) {
+    private  void swap(int indexA, int indexB, int[] array) {
         int temp = array[indexA];
         array[indexA] = array[indexB];
         array[indexB] = temp;
@@ -56,7 +56,7 @@ public class Heap {
      *
      * @param val
      */
-    public static void Insert(int val) {
+    public  void Insert(int val) {
         // extent array
         len = len + 1;
         heapLen++;
@@ -92,7 +92,7 @@ public class Heap {
     }
 
 
-    public static void pop() {
+    public  void pop() {
         if (getHeapLen() == 0) {
             System.out.println("The heap is empty. Cannot do pop.");
             return;
@@ -133,7 +133,7 @@ public class Heap {
         }
     }
 
-    public static void peek() {
+    public  void peek() {
         if (getHeapLen() == 0) {
             System.out.println("The heap is empty. Cannot do peek.");
             return;
@@ -141,13 +141,13 @@ public class Heap {
 
         System.out.println("Peek...the first node of the heap contains value..." + array[1]);
         System.out.print("Now printing the heap after implementing the peek() operation...");
-        getHeap();
+        printHeap();
     }
 
     /**
      * Time complexity of O(nlogn)
      */
-    public static void heapSort() {
+    public  void heapSort() {
         if (getHeapLen() == 0) {
             System.out.println("The heap is empty. Cannot do heap sort.");
             return;
@@ -188,15 +188,15 @@ class TestHeap {
         maxHeap.Insert(15);
         maxHeap.Insert(30);
         maxHeap.Insert(40);
-        maxHeap.getHeap();
+        maxHeap.printHeap();
         System.out.println(maxHeap.getHeapLen());
         maxHeap.pop();
         maxHeap.Insert(66);
-        maxHeap.getHeap();
+        maxHeap.printHeap();
         maxHeap.Insert(16);
-        maxHeap.getHeap();
+        maxHeap.printHeap();
         maxHeap.pop();
-        maxHeap.getHeap();
+        maxHeap.printHeap();
         maxHeap.heapSort();
         System.out.println(maxHeap.getHeapLen());
         maxHeap.heapSort();
