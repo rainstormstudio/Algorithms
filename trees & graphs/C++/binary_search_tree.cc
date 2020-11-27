@@ -12,36 +12,37 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <string>
+
+struct Node;
+using NodePtr = std::shared_ptr<Node>;
 
 struct Node {
     int key;
-    std::shared_ptr<Node> left;
-    std::shared_ptr<Node> right;
+    NodePtr left;
+    NodePtr right;
 
     Node(int key) : key{key} {}
 };
 
 class BST {
-    std::shared_ptr<Node> root;
+    NodePtr root;
 
-    void print(std::ostream &out, std::shared_ptr<Node> node, int depth) {
+    void print(std::ostream &out, NodePtr node, std::string pfx, bool isRight) {
         if (!node) return;
-        for (int i = 0; i < depth; i ++) {
-            out << "    ";
-        }
-        out << node->key << std::endl;
-        print(out, node->left, depth + 1);
-        print(out, node->right, depth + 1);
+        print(out, node->right, pfx + (isRight ? "    " : "|   "), true);
+        out << pfx + "+---" << node->key << std::endl;
+        print(out, node->left, pfx + (isRight ? "|   " : "    "), false);
     }
 
-    void inorder(std::ostream &out, std::shared_ptr<Node> node) {
+    void inorder(std::ostream &out, NodePtr node) {
         if (!node) return;
         inorder(out, node->left);
         out << node->key << " ";
         inorder(out, node->right);
     }
 
-    std::shared_ptr<Node> search(std::shared_ptr<Node> node, int key) {
+    NodePtr search(NodePtr node, int key) {
         if (!node) return nullptr;
         if (node->key == key) return node;
         if (node->key < key) {
@@ -52,7 +53,7 @@ class BST {
         return node;
     }
 
-    std::shared_ptr<Node> insert(std::shared_ptr<Node> node, int key) {
+    NodePtr insert(NodePtr node, int key) {
         if (!node) return std::make_shared<Node>(key);
         if (node->key == key) return node;
         if (node->key < key) {
@@ -63,27 +64,27 @@ class BST {
         return node;
     }
 
-    std::shared_ptr<Node> getMin(std::shared_ptr<Node> node) {
-        std::shared_ptr<Node> min = node;
+    NodePtr getMin(NodePtr node) {
+        NodePtr min = node;
         while (min && min->left) {
             min = min->left;
         }
         return min;
     }
 
-    std::shared_ptr<Node> remove(std::shared_ptr<Node> node, int key) {
+    NodePtr remove(NodePtr node, int key) {
         if (!node) return nullptr;
         if (node->key == key) {
             if (!node->left) {
-                std::shared_ptr<Node> temp = node->right;
+                NodePtr temp = node->right;
                 node.reset();
                 return temp;
             } else if (!node->right) {
-                std::shared_ptr<Node> temp = node->left;
+                NodePtr temp = node->left;
                 node.reset();
                 return temp;
             }
-            std::shared_ptr<Node> temp = getMin(node->right);
+            NodePtr temp = getMin(node->right);
             node->key = temp->key;
             node->right = remove(node->right, temp->key);
         } else if (node->key < key) {
@@ -103,14 +104,17 @@ public:
     }
 
     void print(std::ostream &out) {
-        print(out, root, 0);
+        if (!root) return;
+        print(out, root->right, "    ", true);
+        out << "+---" << root->key << std::endl;
+        print(out, root->left, "    ", false);
     }
 
     void inorder(std::ostream &out) {
         inorder(out, root);
     }
 
-    std::shared_ptr<Node> search(int key) {
+    NodePtr search(int key) {
         return search(root, key);
     }
 
