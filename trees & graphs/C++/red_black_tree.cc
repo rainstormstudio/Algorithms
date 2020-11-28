@@ -224,6 +224,7 @@ class RBT {
                 }
             }
         }
+        x->color = Node::BLACK;
     }
 
 public:
