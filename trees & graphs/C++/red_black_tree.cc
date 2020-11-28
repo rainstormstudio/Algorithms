@@ -5,6 +5,7 @@
  * @version 0.1
  * @date 2020-11-27
  * @ref https://www.cnblogs.com/skywang12345/p/3245399.html
+ * @ref https://algorithmtutor.com/Data-Structures/Tree/Red-Black-Trees/
  * 
  * @copyright Copyright (c) 2020
  * 
