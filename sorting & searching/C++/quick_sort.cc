@@ -11,18 +11,27 @@
 #include <iostream>
 #include <vector>
 
-void qsort(std::vector<int> &a, int l, int r) {
-    int i = l, j = r, mid = (l + r) / 2;
-    while (i <= j) {
-        while (a[i] < a[mid]) i ++;
-        while (a[j] > a[mid]) j --;
-        if (i <= j) {
-            std::swap(a[i], a[j]);
-            i ++; j --;
+int partition(std::vector<int> &nums, int l, int r) {
+    int pivot = nums[r];
+    int i = l, j = l, temp;
+    while (j < r) {
+        if (nums[j] < pivot) {
+            std::swap(nums[i], nums[j]);
+            i ++;
         }
+        j ++;
     }
-    if (l < j) qsort(a, l, j);
-    if (r > j) qsort(a, i, r);
+    nums[r] = nums[i];
+    nums[i] = pivot;
+    return i;
+}
+
+void qsort(std::vector<int> &nums, int l, int r) {
+    if (l < r) {
+        int mid = partition(nums, l, r);
+        qsort(nums, l, mid - 1);
+        qsort(nums, mid + 1, r);
+    }
 }
 
 /**
