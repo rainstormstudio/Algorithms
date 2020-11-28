@@ -246,6 +246,12 @@ public:
         inorder(out, root);
     }
 
+    /**
+     * @brief insert key into the tree
+     * O(log n)
+     * 
+     * @param key 
+     */
     void insert(int key) {
         NodePtr z = std::make_shared<Node>(key, nullptr, TNULL, Node::RED);
         NodePtr y = nullptr;
@@ -271,6 +277,14 @@ public:
         insert_fixup(z);
     }
 
+    /**
+     * @brief search key in the tree
+     * if not found throws a KeyNotFoundException
+     * O(log n)
+     * 
+     * @param key 
+     * @return NodePtr 
+     */
     NodePtr search(int key) {
         NodePtr node = root;
         while (node != TNULL) {
@@ -287,6 +301,13 @@ public:
         return nullptr;
     }
 
+    /**
+     * @brief remove key from the tree
+     * if not exists, throw KeyNotFoundException
+     * O(log n)
+     * 
+     * @param key 
+     */
     void remove(int key) {
         NodePtr node = root;
         NodePtr z = TNULL;
