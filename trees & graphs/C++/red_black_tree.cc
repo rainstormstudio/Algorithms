@@ -4,6 +4,7 @@
  * @brief This is the program of Red-Black Tree class
  * @version 0.1
  * @date 2020-11-27
+ * @ref https://www.cnblogs.com/skywang12345/p/3245399.html
  * 
  * @copyright Copyright (c) 2020
  * 
