@@ -15,7 +15,6 @@
 
 using Vector = std::vector<double>;
 
-
 class Matrix {
     std::vector<std::vector<double>> mat;
     unsigned int rows;
