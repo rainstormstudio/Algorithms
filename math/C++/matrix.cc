@@ -78,6 +78,8 @@ public:
 
     int getRows() const { return rows; }
 
+    int size() const { return rows; }
+
     int getCols() const { return cols; }
 
     std::vector<std::vector<double>> getMat() {
