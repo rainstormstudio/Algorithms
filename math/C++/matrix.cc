@@ -18,6 +18,18 @@ class Matrix {
     unsigned int rows;
     unsigned int cols;
 public:
+    Matrix(std::vector<std::vector<int>> ary) {
+        rows = ary.size();
+        cols = ary[0].size();
+        mat = std::vector<std::vector<double>>(rows);
+        for (int i = 0; i < rows; i ++) {
+            mat[i] = std::vector<double>(cols);
+            for (int j = 0; j < cols; j ++) {
+                mat[i][j] = ary[i][j];
+            }
+        }
+    }
+
     Matrix(unsigned int rows, unsigned int cols) 
         : rows{rows}, cols{cols} {
         mat = std::vector<std::vector<double>>(rows);
