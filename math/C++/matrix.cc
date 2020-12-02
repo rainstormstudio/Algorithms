@@ -134,6 +134,29 @@ public:
         return *this;
     }
 
+    Matrix operator-(const Matrix& mat2) {
+        Matrix ans(rows, cols);
+        if (rows == mat2.getRows() && cols == mat2.getCols()) {
+            for (int i = 0; i < rows; i ++) {
+                for (int j = 0; j < cols; j ++) {
+                    ans[i][j] = mat[i][j] - mat2[i][j];
+                }
+            }
+        }
+        return ans;
+    }
+
+    Matrix& operator-=(const Matrix& mat2) {
+        if (rows == mat2.getRows() && cols == mat2.getCols()) {
+            for (int i = 0; i < rows; i ++) {
+                for (int j = 0; j < cols; j ++) {
+                    mat[i][j] -= mat2[i][j];
+                }
+            }
+        }
+        return *this;
+    }
+
     Matrix operator*(const Matrix& mat2) {
         Matrix ans(rows, mat2.getCols());
         for (int i = 0; i < rows; i ++) {
