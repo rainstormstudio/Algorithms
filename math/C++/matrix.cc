@@ -18,7 +18,7 @@ class Matrix {
     unsigned int rows;
     unsigned int cols;
 public:
-    Matrix(std::vector<std::vector<int>> ary) {
+    Matrix(std::vector<std::vector<double>> ary) {
         rows = ary.size();
         cols = ary[0].size();
         mat = std::vector<std::vector<double>>(rows);
@@ -260,12 +260,27 @@ public:
             out << std::endl;
         }
     }
+
+    Matrix getLU() {
+        Matrix ans(mat);
+        if (rows != cols) return ans;
+        int N = rows;
+        for (int i = 0; i < N; i ++) {
+            for (int k = i + 1; k < N; k ++) {
+                double mult = ans[k][i] / ans[i][i];
+                ans[k][i] = mult;
+                for (int j = i + 1; j < N; j ++) {
+                    ans[k][j] = ans[k][j] - mult * ans[i][j];
+                }
+            }
+        }
+        return ans;
+    }
 };
 
 int main() {
     Matrix A(std::cin);
-    Matrix B(std::cin);
-    Matrix I = Matrix::identity(5);
-    I.output(std::cout, 10, 5);
+    Matrix U = A.getLU();
+    U.output(std::cout, 10, 5);
     return 0;
 }
