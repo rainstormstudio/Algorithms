@@ -3,7 +3,7 @@
  * @Author Weilan Tao
  * @Date 2020-12-02
  * @Description This is the implementation for linked list based Queue, Java version.
- * @Since version-1.0
+ * @Since version-1.1
  * @Copyright Copyright (c) 2020
  */
 
@@ -21,38 +21,33 @@ public class TQueue<T> {
         public Node (T data){
             this.data =data;
         }
+    }
 
-        public T getData() {
-            return data;
-        }
-
-        public void setData(T data) {
-            this.data = data;
-        }
+    public int getSize() {
+        return size;
     }
 
     public TQueue(){
-        this.head=new Node<T>(null);
-        this.tail=this.head;
-        this.size=0;
-        head.next=null;
+        head=new Node<T>(null);
+        tail=this.head;
+        size=0;
+        tail.next=null;
     }
 
     /**
      * Time complexity as O(1)
      */
-    public void push(T t){
+    public void enQueue(T t){
+        Node<T> node = new Node<>(t);
         if(isEmpty()){
-            head.setData(t);
+            head=node;
+            tail=node;
+            head.next=null;
+            tail.next=null;
         }else{
-            //TODO fix to reduce the Time complexity
-            Node<T> temp = head;
-            while(temp.next!=null){
-                temp=temp.next;
-            }
-            Node<T> node = new Node<>(t);
-            temp.next=node;
-            this.tail=node;
+            tail.next=node;
+            node.next=null;
+            tail=node;
         }
         size++;
     }
@@ -60,15 +55,28 @@ public class TQueue<T> {
     /**
      * Time complexity as O(1)
      */
-    public void pop(){
-
-    }
-
-    public void peek(){
-
+    public void deQueue() throws Exception {
+        if(isEmpty()){
+            throw new Exception();
+        }else{
+            size--;
+            head=head.next;
+        }
     }
 
     public void deleteQueue(){
+        while(head!=tail){
+            try {
+                deQueue();
+            }catch (Exception e) {
+                System.out.println("Can not do deQueue()");
+            }
+        }
+        try {
+            deQueue();
+        }catch (Exception e) {
+            System.out.println("Can not do deQueue()");
+        }
 
     }
 
@@ -76,10 +84,15 @@ public class TQueue<T> {
         return this.size==0? true:false;
     }
 
-    public void printQueue(){
+    public void printQueue() {
+        if(isEmpty()){
+            System.out.println("The Queue is empty.");
+        }
         for(Node<T> temp=head; temp!=null; temp=temp.next){
             System.out.print(temp.data);
         }
+        System.out.println(" ");
+
     }
 
 }
@@ -87,19 +100,45 @@ public class TQueue<T> {
 class testTQueue{
     public static void main (String args[]){
         TQueue<Character> tQueue=new TQueue<>();
-        tQueue.push('H');
-        tQueue.push('e');
-        tQueue.push('l');
-        tQueue.push('l');
-        tQueue.push('o');
-        tQueue.push(' ');
-        tQueue.push('W');
-        tQueue.push('o');
-        tQueue.push('r');
-        tQueue.push('l');
-        tQueue.push('d');
+        tQueue.enQueue('H');
+        tQueue.enQueue('e');
+        tQueue.enQueue('l');
+        tQueue.enQueue('l');
+        tQueue.enQueue('o');
+        tQueue.enQueue(' ');
+        tQueue.enQueue('W');
+        tQueue.enQueue('o');
+        tQueue.enQueue('r');
+        tQueue.enQueue('l');
+        tQueue.enQueue('d');
+        tQueue.printQueue();
+        System.out.println(tQueue.getSize());
+
+        try {
+            tQueue.deQueue();
+        } catch (Exception e) {
+            System.out.println("Can not do deQueue()");
+        }
+        System.out.println(tQueue.getSize());
+
         tQueue.printQueue();
 
+        tQueue.deleteQueue();
+        tQueue.printQueue();
+        try {
+            tQueue.deQueue();
+        } catch (Exception e) {
+            System.out.println("Can not do deQueue()");
+        }
+        System.out.println(tQueue.getSize());
+
+
+        tQueue.enQueue('H');
+        tQueue.enQueue('i');
+        tQueue.enQueue('i');
+        tQueue.enQueue('i');
+        tQueue.printQueue();
+        System.out.println(tQueue.getSize());
 
     }
 }
