@@ -86,6 +86,7 @@ public class BinarySearchTree {
 
     public void inOrder(){
         inOrderRec(root);
+        System.out.println(" ");
     }
     private void inOrderRec(Node node){
         if (node!=null){
@@ -94,6 +95,13 @@ public class BinarySearchTree {
             inOrderRec(node.right);
         }
     }
+    private void preOrder(Node node){
+
+    }
+    private void levelOrder(Node node){
+
+    }
+
 
     public boolean contains(int val){
         return  searchRec(root, val)!=null;
@@ -116,13 +124,47 @@ public class BinarySearchTree {
     }
 
     public Node getMin(Node node){
-
         return null;
     }
 
-    public void remove(int value){
+    public Node remove(Node node, int value){
+        if(node==null){
+            return null;
+        }
+
+        if (node.value==value){
+            //have two child nodes
+            if(node.left!=null && node.right!=null){
 
 
+
+            }
+            //have one child node
+            else if(node.left!=null){
+                Node temp= getMin(node);
+                temp.
+
+            }else if(node.right!=null){
+
+            }
+            //have no child node
+            else {
+                node=null;
+                return node;
+            }
+
+
+        }else if(node.value>value){
+            return null;
+        }else if (node.value<value){
+            return null;
+        }
+
+
+    }
+
+    public void remove(int value ){
+        if(contains(value)) remove(root, value);
     }
 }
 
@@ -139,6 +181,9 @@ class TestBST{
 //        bst.printTree();
         bst.inOrder();
         System.out.println(bst.contains(4));
+
+        bst.remove(9);
+        bst.remove(4);
 
     }
 }
