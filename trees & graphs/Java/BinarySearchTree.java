@@ -1,18 +1,15 @@
 /**
  * @File BinarySearchTree.java
  * @Author Weilan Tao
- * @Date 2020-12-03
+ * @Date 2020-12-06
  * @Description This is the implementation for Binary Search Tree, Java version.
- * @Since version-1.1
+ * @Since version-1.2
  * @Copyright Copyright (c) 2020
  */
 
 
 public class BinarySearchTree {
     private Node root;
-    private int size;
-    private static String STR = Character.toString((char)47);
-    private static String STR1 = Character.toString((char)92);
 
     class Node{
         int value;
@@ -26,7 +23,7 @@ public class BinarySearchTree {
         }
     }
     public  BinarySearchTree(){
-        Node root;  //为什么？
+
     }
 
     public void insert(int val ){
@@ -45,43 +42,29 @@ public class BinarySearchTree {
         }else{
             node.left=insertRec(node.left,val);
         }
-        size++;
+
         return node;
     }
 
 
 
-    public  void printTree(){
-        printTreeREC(root);
+    public void printTree(){
+        if(root!=null){
+            printTreeREC(root.right,"    ",true);
+            System.out.println("+---"+root.value);
+            printTreeREC(root.left,"    ",false);
+        }
+
     }
 
-    //TODO Adjust the position
-    private void printTreeREC(Node node){
+    private void printTreeREC(Node node, String pfx,  boolean isRight){
         if(node==null){
-            System.out.println("invalid node");
             return;
         }
 
-        if(node.left!=null&&node.right!=null){
-            System.out.println(node.value);
-            System.out.println(STR);
-            printTreeREC(node.left);
-            System.out.println(STR1);
-//            printTreeREC(node.left);
-            printTreeREC(node.right);
-        }else if(node.left!=null&&node.right==null){
-            System.out.println(node.value);
-            System.out.println(STR);
-            printTreeREC(node.left);
-        }else if(node.left==null&&node.right!=null){
-            System.out.println(node.value);
-            System.out.println(STR1);
-            printTreeREC(node.right);
-        }else{
-            System.out.println(node.value);
-        }
-
-
+        printTreeREC(node.right,pfx+(isRight ? "    " : "|   "),true);
+        System.out.println(pfx+"+---"+node.value);
+        printTreeREC(node.left,pfx+(isRight ? "|   " : "    "),false);
     }
 
     public void inOrder(){
@@ -95,13 +78,6 @@ public class BinarySearchTree {
             inOrderRec(node.right);
         }
     }
-    private void preOrder(Node node){
-
-    }
-    private void levelOrder(Node node){
-
-    }
-
 
     public boolean contains(int val){
         return  searchRec(root, val)!=null;
@@ -123,44 +99,46 @@ public class BinarySearchTree {
         }
     }
 
-    public Node getMin(Node node){
-        return null;
+    public Node getMin(Node node) {
+        if (node == null) {
+            return node;
+        } else {
+            while (node.left != null) {
+                node = node.left;
+            }
+            return node;
+        }
     }
 
     public Node remove(Node node, int value){
         if(node==null){
-            return null;
+        }else{
+            if (node.value==value){
+                //have two child nodes
+                if(node.left!=null && node.right!=null){
+                    Node temp=getMin(node.right);
+                    node.value=temp.value;
+                    node.right=remove(node.right,temp.value);
+                    temp=null;
+                }
+                else if(node.left!=null){
+                    return node.left;
+                }else if(node.right!=null){
+
+                    return node.right;
+                }
+                else {
+                    node=null;
+                    return node;
+                }
+
+            }else if(node.value>value){
+                node.left=remove(node.left, value);
+            }else if (node.value<value){
+                node.right=remove(node.right, value);
+            }
         }
-
-        if (node.value==value){
-            //have two child nodes
-            if(node.left!=null && node.right!=null){
-
-
-
-            }
-            //have one child node
-            else if(node.left!=null){
-                Node temp= getMin(node);
-                temp.
-
-            }else if(node.right!=null){
-
-            }
-            //have no child node
-            else {
-                node=null;
-                return node;
-            }
-
-
-        }else if(node.value>value){
-            return null;
-        }else if (node.value<value){
-            return null;
-        }
-
-
+        return node;
     }
 
     public void remove(int value ){
@@ -171,19 +149,30 @@ public class BinarySearchTree {
 class TestBST{
     public static void main(String [] args){
         BinarySearchTree bst = new BinarySearchTree();
-        bst.insert(6);
-        bst.insert(4);
-        bst.insert(8);
-        bst.insert(3);
-        bst.insert(5);
-        bst.insert(7);
-        bst.insert(9);
-//        bst.printTree();
+        bst.insert(50);
+        bst.insert(30);
+        bst.insert(80);
+        bst.insert(20);
+        bst.insert(35);
+        bst.insert(34);
+        bst.insert(32);
+        bst.insert(40);
+        bst.insert(70);
+        bst.insert(75);
+        bst.insert(100);
+
+        bst.printTree();
         bst.inOrder();
         System.out.println(bst.contains(4));
 
-        bst.remove(9);
+        bst.remove(70);
         bst.remove(4);
+
+        bst.printTree();
+
+        bst.remove(30);
+        bst.printTree();
+
 
     }
 }
