@@ -276,9 +276,12 @@ public:
         int N = A.size();
         for (int i = 0; i < N; i ++) {
             for (int k = i + 1; k < N; k ++) {
+                std::cout << "mult = " << A[k][i] << "/" << A[i][i] << std::endl;
                 double mult = A[k][i] / A[i][i];
                 A[k][i] = mult;
                 for (int j = i + 1; j < N; j ++) {
+                    std::cout << "A[" << k << "][" << j << "] = " << 
+                    A[k][j] << " - " << mult << "*" << A[i][j] << std::endl;
                     A[k][j] = A[k][j] - mult * A[i][j];
                 }
                 b[k] = b[k] - mult * b[i];
